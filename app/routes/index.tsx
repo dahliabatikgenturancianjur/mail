@@ -7,9 +7,10 @@ export const GET = createRoute(async (c) => {
   const { results } = await db.prepare("SELECT * FROM emails ORDER BY created_at DESC LIMIT 50").all()
 
   return c.render(
-    <div>
+    <div class="legacy-container">
       <div class="header">
         <h1>Mailbox Personal</h1>
+        <button onclick="document.cookie='mailbox_session=; Max-Age=0; path=/;'; window.location.reload();" class="text-sm text-red-600 hover:underline">Logout</button>
       </div>
 
       <div style="display: flex; gap: 30px;">
@@ -43,7 +44,7 @@ export const GET = createRoute(async (c) => {
               <div id="editor-container"></div>
               <input type="hidden" id="body_html" name="body_html" />
             </div>
-            <button type="submit" class="btn" id="submit-btn">Kirim Sekarang</button>
+            <button type="submit" class="btn-legacy" id="submit-btn">Kirim Sekarang</button>
           </form>
           <div id="status-message" style="margin-top: 15px; font-weight: bold;"></div>
         </div>
