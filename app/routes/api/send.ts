@@ -1,5 +1,5 @@
 // app/routes/api/send.ts
-import { createRoute } from 'hono/factory'
+import { createRoute } from 'honox/factory'
 
 export const POST = createRoute(async (c) => {
   try {
