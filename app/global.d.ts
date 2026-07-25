@@ -11,6 +11,8 @@ declare module 'hono' {
     Bindings: {
       DB: D1Database
       BREVO_API_KEY: string
+      MAILBOX_USERNAME: string
+      MAILBOX_PASSWORD: string
     }
   }
   interface ContextRenderer {
