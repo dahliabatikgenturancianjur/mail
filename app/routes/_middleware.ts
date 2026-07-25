@@ -1,21 +1,19 @@
 // app/routes/_middleware.ts
-import { basicAuth } from 'hono/basic-auth'
+import { getCookie } from 'hono/cookie'
 import { createMiddleware } from 'hono/factory'
 
 export default [
   createMiddleware(async (c, next) => {
-    const username = c.env.MAILBOX_USERNAME;
-    const password = c.env.MAILBOX_PASSWORD;
-
-    if (!username || !password) {
-      return c.text("Kesalahan Sistem: Username dan Password belum dikonfigurasi di Environment Variables.", 500);
+    if (c.req.path === '/login' || c.req.path === '/api/login') {
+      return next();
     }
 
-    const auth = basicAuth({
-      username: username,
-      password: password,
-    });
+    const authCookie = getCookie(c, 'mailbox_session');
+    
+    if (authCookie === 'authenticated') {
+      return next();
+    }
 
-    return auth(c, next);
+    return c.redirect('/login');
   })
 ];
