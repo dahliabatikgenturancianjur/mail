@@ -1,5 +1,5 @@
 // app/routes/index.tsx
-import { createRoute } from 'hono/factory'
+import { createRoute } from 'honox/factory'
 
 export const GET = createRoute(async (c) => {
   const db = c.env.DB
